@@ -1,0 +1,77 @@
+{
+  "name": "vscode-llm-chat",
+  "displayName": "LLM Chat",
+  "description": "Chat with LLM models directly in VS Code",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vscode-llm-chat.openChat",
+        "title": "Open LLM Chat"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "vscode-llm-chat.openChat",
+        "key": "ctrl+l",
+        "mac": "cmd+l"
+      }
+    ],
+    "configuration": {
+      "title": "LLM Chat",
+      "properties": {
+        "llmChat.endpoint": {
+          "type": "string",
+          "default": "http://localhost:3000/chat",
+          "description": "The endpoint URL for the LLM API"
+        },
+        "llmChat.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for the LLM service"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "llm-chat-sidebar",
+          "title": "LLM Chat",
+          "icon": "media/chat.svg"
+        }
+      ]
+    },
+    "views": {
+      "llm-chat-sidebar": [
+        {
+          "type": "webview",
+          "id": "llm-chat.chatView",
+          "name": "LLM Chat"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^20.8.7",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "eslint": "^8.51.0",
+    "typescript": "^5.2.2"
+  }
+}
